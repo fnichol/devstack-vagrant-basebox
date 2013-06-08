@@ -2,9 +2,10 @@
 set -e
 
 GIT_URL="git://github.com/openstack-dev/devstack.git"
-SRC_DIR="/usr/local/src/devstack"
+SRC_DIR="/tmp/devstack"
+DEST="/opt/stack"
 PASS="stack"
-IP="33.33.33.33"
+IP="172.16.100.10"
 
 banner()  { printf -- "-----> $*\n"; }
 log()     { printf -- "       $*\n"; }
@@ -24,7 +25,7 @@ git clone "$GIT_URL" "$SRC_DIR"
 
 banner "Creating $SRC_DIR/localrc"
 cat <<_LOCALRC_ > "$SRC_DIR/localrc"
-DEST=/opt/stack
+DEST=$DEST
 ENABLED_SERVICES+=,tempest
 ADMIN_PASSWORD=$PASS
 MYSQL_PASSWORD=$PASS
@@ -32,11 +33,11 @@ RABBIT_PASSWORD=$PASS
 SERVICE_PASSWORD=$PASS
 SERVICE_TOKEN=servtoken
 HOST_IP=$IP
-SERVICE_HOST=$HOST_IP
+SERVICE_HOST=\$HOST_IP
 LOGFILE=stack.sh.log
 LOGDAYS=1
 LOG_COLOR=False
-SCREEN_LOGDIR=$DEST/logs/screen
+SCREEN_LOGDIR=\$DEST/logs/screen
 API_RATE_LIMIT=False
 APT_FAST=True
 RECLONE=no
@@ -46,6 +47,9 @@ banner "Running stack.sh, this may take a while"
 time ($SRC_DIR/stack.sh)
 
 banner "Enabling offline mode in localrc"
-echo 'OFFLINE=True' >> "$SRC_DIR/localrc"
+echo 'OFFLINE=True' >> "$DEST/devstack/localrc"
+
+banner "Cleaning up"
+rm -rf "$SRC_DIR"
 
 banner 'All done!'
