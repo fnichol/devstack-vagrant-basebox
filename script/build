@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -e
+[ -n "$BUILD_DEBUG" ] && set -x
+
+banner()  { printf -- "-----> $*\n"; }
+log()     { printf -- "       $*\n"; }
+warn()    { printf -- ">>>>>> $*\n"; }
+fail()    { printf -- "\nERROR: $*\n" ; exit 1 ; }
+
+if [ -n "$1" ] ; then
+  provider="--provider=$1"
+fi
+
+banner "Cleaing up any existing Vagrant virtual machines"
+vagrant destroy -f
+
+banner "Bringing up Vagrant virtual machine"
+time (vagrant up $provider)
+
+banner "Exporting Vagrant virtual machine"
+vagrant package --output devstack-$(date +%Y%m%d%k%M).box
+
+banner 'All done, go make stuff now!'

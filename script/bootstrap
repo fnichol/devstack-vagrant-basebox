@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -e
+[ -n "$BOOTSTRAP_DEBUG" ] && set -x
+
+banner()  { printf -- "-----> $*\n"; }
+log()     { printf -- "       $*\n"; }
+warn()    { printf -- ">>>>>> $*\n"; }
+fail()    { printf -- "\nERROR: $*\n" ; exit 1 ; }
+
+if ! command -v vagrant >/dev/null ; then
+  fail "An installation of Vagrant could not be found, please install a package"
+fi
+
+banner "Checking for Vagrant"
+if [[ "$(vagrant --version)" < "Vagrant version 1.1.0" ]] ; then
+  fail "Only Vagrant versions 1.1.0 and up are supported, please update"
+fi
+
+banner 'All ready!'
