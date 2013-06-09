@@ -47,6 +47,22 @@ APT_FAST=True
 RECLONE=no
 _LOCALRC_
 
+banner "Creating $SRC_DIR/local.sh"
+cat <<_LOCALSH_ > "$SRC_DIR/local.sh"
+#!/bin/bash
+TOP_DIR=$SRC_DIR
+source \$TOP_DIR/functions
+source \$TOP_DIR/stackrc
+
+# OpenStack credentials
+source \$TOP_DIR/openrc
+
+# Add tcp/22 and icmp to default security group
+nova secgroup-add-rule default tcp 22 22 0.0.0.0/0
+nova secgroup-add-rule default icmp -1 -1 0.0.0.0/0
+_LOCALSH_
+chmod +x "$SRC_DIR/local.sh"
+
 banner "Running stack.sh, this may take a while"
 time ($SRC_DIR/stack.sh)
 
