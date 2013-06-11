@@ -17,8 +17,8 @@ mkdir -p "$(dirname $SRC_DIR)"
 banner "Running apt-get update"
 apt-get update
 
-banner "Installing git"
-apt-get install -y git
+banner "Installing base packages"
+apt-get install -y git gir1.2-gnomekeyring-1.0
 
 banner "Cloning devstack"
 git clone "$GIT_URL" "$SRC_DIR"
