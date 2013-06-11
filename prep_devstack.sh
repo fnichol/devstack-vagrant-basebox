@@ -60,6 +60,12 @@ source \$TOP_DIR/openrc
 # Add tcp/22 and icmp to default security group
 nova secgroup-add-rule default tcp 22 22 0.0.0.0/0
 nova secgroup-add-rule default icmp -1 -1 0.0.0.0/0
+
+# Load external local.sh if it exists via Vagrant share
+if [ -x /vagrant/local.sh ] ; then
+  echo "-----> Running local project user script"
+  /vagrant/local.sh
+fi
 _LOCALSH_
 chmod +x "$SRC_DIR/local.sh"
 
