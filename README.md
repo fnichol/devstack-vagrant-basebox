@@ -1,8 +1,8 @@
-# Dev Stack Vagrant Base Box
+# Vagrant Box Generator for OpenStack's DevStack
 
 ## Usage
 
-Simply run:
+To generate a brand new Vagrant box, simply run:
 
     ./script/build
 
@@ -12,6 +12,23 @@ If you want to use an alternate provider (such as VMware Fusion), simply
 provide the provider name like so:
 
     ./script/build vmware_fusion
+
+## Box Details
+
+* The operating system is Ubuntu 12.04
+* The generated box will have a pre-determined private IP address
+  of **172.16.100.10**. This helps to expose all the entire virtual machine
+  ports to your workstation
+* The fixed address range for Nova instances
+  is **172.16.100.129** - **172.16.100.254**
+* The floating address range for Nova instances
+  is **172.16.100.65** - **172.16.100.126**
+* The default password for the admin user, mysql, rabbit, etc. is `"stack"`
+* The `"default"` security group has ICMP and SSH traffic enabled by default
+* Offline mode will be enabled after initial build from setting `OFFLINE=True`
+* Reclone mode is disabled by default from setting `RECLONE=no`
+* Placing a `local.sh` file (which is executable) in the same directory as your
+  project Vagrantfile allows you to further customize the devstack setup.
 
 ## Development
 
