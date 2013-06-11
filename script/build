@@ -11,22 +11,22 @@ if [ -n "$1" ] ; then
   provider="--provider=$1"
 fi
 
-banner "Cleaing up any existing Vagrant virtual machines"
-vagrant destroy -f
-
-banner "Bringing up Vagrant virtual machine"
-time (vagrant up $provider)
-
 # calculate a semver string for the build of the form:
 #
 #     MAJOR.MINOR.PATCH-PRERELEASE+TIMESTAMP.git.COMMITS_SINCE.GIT_SHA
 #
 tag="$(git describe 2>/dev/null || echo '0.0.0')"
 box="devstack-$(echo $tag | perl -MPOSIX -pe '
-  $t = POSIX::strftime("%Y%m%d%H%M%S", localtime);
+  $t = POSIX::strftime("%Y%m%d%H%M%S", gmtime);
   s/^v?(\d+\.\d+\.\d+(?{-\w})?)-(\d+)-g(.+)$/$1+$t.git.$2.$3/;
   s/^v?(\d+\.\d+\.\d+)$/$1+$t/
 ').box"
+
+banner "Cleaing up any existing Vagrant virtual machines"
+vagrant destroy -f
+
+banner "Bringing up Vagrant virtual machine"
+time (vagrant up $provider)
 
 banner "Exporting Vagrant virtual machine to $box"
 vagrant package --vagrantfile Vagrantfile.pkg --output "$box"
