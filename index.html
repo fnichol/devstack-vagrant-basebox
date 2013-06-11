@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Vagrant Box Generator for OpenStack's DevStack : " />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Vagrant Box Generator for OpenStack's DevStack</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/fnichol/devstack-vagrant-basebox">View on GitHub</a>
+
+          <h1 id="project_title">Vagrant Box Generator for OpenStack's DevStack</h1>
+          <h2 id="project_tagline"></h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/fnichol/devstack-vagrant-basebox/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/fnichol/devstack-vagrant-basebox/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>To generate a brand new Vagrant box, simply run:</p>
+
+<pre><code>./script/build
+</code></pre>
+
+<p>and go take a walk.</p>
+
+<p>If you want to use an alternate provider (such as VMware Fusion), simply
+provide the provider name like so:</p>
+
+<pre><code>./script/build vmware_fusion
+</code></pre>
+
+<h2>
+<a name="box-details" class="anchor" href="#box-details"><span class="octicon octicon-link"></span></a>Box Details</h2>
+
+<ul>
+<li>The operating system is Ubuntu 12.04</li>
+<li>The generated box will have a pre-determined private IP address
+of <strong>172.16.100.10</strong>. This helps to expose all the entire virtual machine
+ports to your workstation</li>
+<li>The fixed address range for Nova instances
+is <strong>172.16.100.129</strong> - <strong>172.16.100.254</strong>
+</li>
+<li>The floating address range for Nova instances
+is <strong>172.16.100.65</strong> - <strong>172.16.100.126</strong>
+</li>
+<li>The default password for the admin user, mysql, rabbit, etc. is <code>"stack"</code>
+</li>
+<li>The <code>"default"</code> security group has ICMP and SSH traffic enabled by default</li>
+<li>Offline mode will be enabled after initial build from setting <code>OFFLINE=True</code>
+</li>
+<li>Reclone mode is disabled by default from setting <code>RECLONE=no</code>
+</li>
+<li>Placing a <code>local.sh</code> file (which is executable) in the same directory as your
+project Vagrantfile allows you to further customize the devstack setup.</li>
+</ul><h2>
+<a name="development" class="anchor" href="#development"><span class="octicon octicon-link"></span></a>Development</h2>
+
+<h3>
+<a name="development-setup" class="anchor" href="#development-setup"><span class="octicon octicon-link"></span></a>Development Setup</h3>
+
+<p>Setting up for development should <em>only</em> require the following:</p>
+
+<pre><code>git clone &lt;git_url&gt;
+cd &lt;repo-dir&gt;
+./script/bootstrap
+</code></pre>
+
+<h3>
+<a name="refreshingupdating-local-copy" class="anchor" href="#refreshingupdating-local-copy"><span class="octicon octicon-link"></span></a>Refreshing/Updating Local Copy</h3>
+
+<p>Similiar to the <strong>Development Setup</strong>:</p>
+
+<pre><code>git pull
+./script/bootstrap
+</code></pre>
+
+<h2>
+<a name="-development" class="anchor" href="#-development"><span class="octicon octicon-link"></span></a><a name="development"></a> Development</h2>
+
+<ul>
+<li>Source hosted at <a href="https://github.com/fnichol/devstack-vagrant-basebox">GitHub</a>
+</li>
+<li>Report issues/questions/feature requests on <a href="https://github.com/fnichol/devstack-vagrant-basebox/issues">GitHub Issues</a>
+</li>
+</ul><p>Pull requests are very welcome! Make sure your patches are well tested.
+Ideally create a topic branch for every separate change you make. For
+example:</p>
+
+<ol>
+<li>Fork the repo</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Added some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol><h2>
+<a name="-authors" class="anchor" href="#-authors"><span class="octicon octicon-link"></span></a><a name="authors"></a> Authors</h2>
+
+<p>Created and maintained by <a href="https://github.com/fnichol">Fletcher Nichol</a> (<a href="mailto:fnichol@nichol.ca">fnichol@nichol.ca</a>)</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Vagrant Box Generator for OpenStack's DevStack maintained by <a href="https://github.com/fnichol">fnichol</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-29670723-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
