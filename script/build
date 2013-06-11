@@ -20,6 +20,6 @@ time (vagrant up $provider)
 banner "Exporting Vagrant virtual machine"
 vagrant package \
   --vagrantfile Vagrantfile.pkg \
-  --output devstack-$(date +%Y%m%d%k%M).box
+  --output devstack-$(date +%Y%m%d%H%M).box
 
 banner 'All done, go make stuff now!'
