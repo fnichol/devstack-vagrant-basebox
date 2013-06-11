@@ -50,7 +50,7 @@ _LOCALRC_
 banner "Creating $SRC_DIR/local.sh"
 cat <<_LOCALSH_ > "$SRC_DIR/local.sh"
 #!/bin/bash
-TOP_DIR=$SRC_DIR
+TOP_DIR=$DEST/devstack
 source \$TOP_DIR/functions
 source \$TOP_DIR/stackrc
 
