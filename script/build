@@ -22,7 +22,7 @@ box="devstack-$(echo $tag | perl -MPOSIX -pe '
   s/^v?(\d+\.\d+\.\d+)$/$1+$t/
 ').box"
 
-banner "Cleaing up any existing Vagrant virtual machines"
+banner "Cleaning up any existing Vagrant virtual machines"
 vagrant destroy -f
 
 banner "Bringing up Vagrant virtual machine"
