@@ -12,7 +12,7 @@ if ! command -v vagrant >/dev/null ; then
 fi
 
 banner "Checking for Vagrant"
-if [[ "$(vagrant --version)" < "Vagrant version 1.1.0" ]] ; then
+if [[ "$(vagrant --version | awk '{ print $NF }')" < "1.1.0" ]] ; then
   fail "Only Vagrant versions 1.1.0 and up are supported, please update"
 fi
 
